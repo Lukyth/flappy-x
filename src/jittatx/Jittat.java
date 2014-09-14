@@ -5,23 +5,25 @@ import org.newdawn.slick.SlickException;
 
 public class Jittat {
 
-	public static final int WIDTH = 40;
-	public static final int HEIGHT = 40;
+	public static final int WIDTH = 20;
+	public static final int HEIGHT = 20;
 	
 	private float x;
 	private float y;
-	private float dir;
-	private float v;
-	private float a;
+	private float vx;
+	private float vy;
+	private float ax;
+	private float ay;
 	
 	private Image image;
 	
-	public Jittat(float x, float y, float dir, float v) throws SlickException {
+	public Jittat(float x, float y, float v, float a) throws SlickException {
 		this.x = x;
 		this.y = y;
-		this.dir = dir;
-		this.v = v;
-		this.a = 0.2f;
+		this.vx = v;
+		this.vy = v;
+		this.ax = a;
+		this.ay = a;
 		image = new Image("res/jittat.png");
 	}
 
@@ -30,9 +32,26 @@ public class Jittat {
 	}
 	
 	public void update() {
-		x += Math.sin(Math.toRadians(dir)) * v;
-		y -= Math.cos(Math.toRadians(dir)) * v;
-		v += a;
+		updatePosition();
+		updateVelocity();
+	}
+
+	private void updatePosition() {
+		x += vx;
+		y += vy;
+	}
+	
+	private void updateVelocity() {
+		vx += ax;
+		vy += ay;
+	}
+
+	public void switchX() {
+		ax = -ax;
+	}
+	
+	public void switchY() {
+		ay = -ay;
 	}
 
 }
