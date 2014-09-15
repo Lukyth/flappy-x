@@ -1,9 +1,9 @@
-package jittatx;
+package flappyx;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Jittat {
+public class Player {
 
 	public static final int WIDTH = 20;
 	public static final int HEIGHT = 20;
@@ -17,14 +17,14 @@ public class Jittat {
 	
 	private Image image;
 	
-	public Jittat(float x, float y, float v, float a) throws SlickException {
+	public Player(float x, float y, float v, float a) throws SlickException {
 		this.x = x;
 		this.y = y;
 		this.vx = v;
 		this.vy = v;
 		this.ax = a;
 		this.ay = a;
-		image = new Image("res/jittat.png");
+		image = new Image("res/circle.png");
 	}
 
 	public void render() {
