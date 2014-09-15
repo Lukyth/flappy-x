@@ -12,8 +12,6 @@ A midterm project for 2nd year's OOP class, Computer Engineering, Kasetsart Univ
 
 ## Features
   
-  * 
-  * 
 
 ## Contributors
 Adviser : Jittat Fakcharoenphol
