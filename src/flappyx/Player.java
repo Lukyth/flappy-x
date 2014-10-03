@@ -1,9 +1,12 @@
 package flappyx;
 
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Player {
+import flappyx.Entity;
+
+public class Player implements Entity {
 
 	public static final int WIDTH = 20;
 	public static final int HEIGHT = 20;
@@ -34,11 +37,11 @@ public class Player {
 		image = new Image("res/circle.png");
 	}
 
-	public void render() {
+	public void render(Graphics g) {
 		image.draw(x - WIDTH/2, MainGame.GAME_HEIGHT - y - (HEIGHT/2));
 	}
 	
-	public void update() {
+	public void update(int delta) {
 		updatePosition();
 		updateVelocity();
 		updateAcceleration();
