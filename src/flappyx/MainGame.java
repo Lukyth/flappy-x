@@ -17,8 +17,8 @@ public class MainGame extends BasicGame {
 	private Player player;
 	private Audio wavEffect;
 	
-	public static final int GAME_WIDTH = 640;
-	public static final int GAME_HEIGHT = 480;
+	public static final int GAME_WIDTH = 960;
+	public static final int GAME_HEIGHT = 640;
 	
 	public MainGame(String title) {
 		super(title);
@@ -27,7 +27,6 @@ public class MainGame extends BasicGame {
 	@Override
 	public void keyPressed(int key, char c) {
 		if (key == Input.KEY_SLASH) {
-			System.out.println("slash");
 			player.switchY();
 			wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
 		}
@@ -44,11 +43,10 @@ public class MainGame extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		player = new Player(GAME_WIDTH/2, GAME_HEIGHT/2, 0f, 0.1f);
+		player = new Player(GAME_WIDTH/2, GAME_HEIGHT/2, 0.2f, -2f, 0.04f);
 	    try {
 			wavEffect = AudioLoader.getAudio("WAV", ResourceLoader.getResourceAsStream("res/bading.wav"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -63,7 +61,7 @@ public class MainGame extends BasicGame {
 			MainGame game = new MainGame("Flappy X"); 
 			AppGameContainer container = new AppGameContainer(game);
 			container.setDisplayMode(GAME_WIDTH, GAME_HEIGHT, false);
-			container.setMinimumLogicUpdateInterval(1000/20);
+			container.setMinimumLogicUpdateInterval(1000/60);
 			container.start();
 		} catch (SlickException e) {
 			e.printStackTrace();
