@@ -45,7 +45,28 @@ public class Obstacle implements Entity {
 	
 	@Override
 	public void update(int delta) {
+		System.out.println(y);
+		updatePosition();
+		updateWrapAround();
+	}
 	
+	protected void updatePosition() {
+		y += vy;
+	}
+
+	private void updateWrapAround() {
+		if (isBelowScene()) {
+			moveToAboveScene();
+		}
+	}
+
+	private void moveToAboveScene() {
+		y -= (MainGame.GAME_HEIGHT / (MainGame.OBSTACLE_COUNT-1f)) * MainGame.OBSTACLE_COUNT;
+		x = randomX();
+	}
+
+	private boolean isBelowScene() {
+		return y > MainGame.GAME_HEIGHT + HEIGHT / 2;
 	}
 	
 }

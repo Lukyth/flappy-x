@@ -20,7 +20,7 @@ public class MainGame extends BasicGame {
 	
 	public static final int GAME_WIDTH = 480;
 	public static final int GAME_HEIGHT = 640;
-	public static final int OBSTACLE_COUNT = 3;
+	public static final int OBSTACLE_COUNT = 4;
 	
 	private Obstacle[] obstacles;
 	private ArrayList<Entity> entities;
@@ -38,14 +38,14 @@ public class MainGame extends BasicGame {
 	}
 
 	private void initPlayer() throws SlickException{
-		player = new Player(GAME_WIDTH/2, GAME_HEIGHT/2, 0.2f, -2f, 0.04f);
+		player = new Player(GAME_WIDTH/2, GAME_HEIGHT/4, 0.2f, -2f, 0.04f);
 		entities.add(player);
 	}
 	
 	private void initObstacle() throws SlickException {
 		obstacles = new Obstacle[OBSTACLE_COUNT];
 		for (int i = 0; i < OBSTACLE_COUNT; i++) {
-			obstacles[i] = new Obstacle(Obstacle.randomX(), Obstacle.HEIGHT + ((float)GAME_HEIGHT / OBSTACLE_COUNT) * i, 0);
+			obstacles[i] = new Obstacle(Obstacle.randomX(), -MainGame.GAME_HEIGHT + Obstacle.HEIGHT + (GAME_HEIGHT / (OBSTACLE_COUNT-1f)) * i - (GAME_HEIGHT / 2f), 4f);
 			entities.add(obstacles[i]);
 		}
 	}
