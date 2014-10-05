@@ -18,7 +18,7 @@ public class MainGame extends BasicGame {
 	private Player player;
 	private Audio wavEffect;
 	
-	public static final int GAME_WIDTH = 960;
+	public static final int GAME_WIDTH = 480;
 	public static final int GAME_HEIGHT = 640;
 	public static final int OBSTACLE_COUNT = 3;
 	
@@ -31,24 +31,23 @@ public class MainGame extends BasicGame {
 	}
 
 	@Override
-	public void init(GameContainer container) {
+	public void init(GameContainer container) throws SlickException {
 		initPlayer();
 		initObstacle();
 		initSound();
 	}
 
-	private void initPlayer(){
-		try {
-			player = new Player(GAME_WIDTH/2, GAME_HEIGHT/2, 0.2f, -2f, 0.04f);
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
+	private void initPlayer() throws SlickException{
+		player = new Player(GAME_WIDTH/2, GAME_HEIGHT/2, 0.2f, -2f, 0.04f);
 		entities.add(player);
 	}
 	
-	private void initObstacle() {
-		// TODO Auto-generated method stub
-		
+	private void initObstacle() throws SlickException {
+		obstacles = new Obstacle[OBSTACLE_COUNT];
+		for (int i = 0; i < OBSTACLE_COUNT; i++) {
+			obstacles[i] = new Obstacle(Obstacle.randomX(), Obstacle.HEIGHT + ((float)GAME_HEIGHT / OBSTACLE_COUNT) * i, 0);
+			entities.add(obstacles[i]);
+		}
 	}
 
 	private void initSound() {
@@ -75,26 +74,24 @@ public class MainGame extends BasicGame {
 	
 	@Override
 	public void keyPressed(int key, char c) {
-		if (key == Input.KEY_SLASH) {
-			player.switchY();
-			wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
-		}
-		if (key == Input.KEY_Z) {
-			player.switchX();
-			wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
+		switch (key) {
+			case Input.KEY_SLASH:
+				player.switchY();
+				wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
+				break;
+			case Input.KEY_Z:
+				player.switchX();
+				wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
+				break;
 		}
 	}
 
-	public static void main(String[] args) {
-		try {
-			MainGame game = new MainGame("Flappy X"); 
-			AppGameContainer container = new AppGameContainer(game);
-			container.setDisplayMode(GAME_WIDTH, GAME_HEIGHT, false);
-			container.setMinimumLogicUpdateInterval(1000/60);
-			container.start();
-		} catch (SlickException e) {
-			e.printStackTrace();
-		}
+	public static void main(String[] args) throws SlickException {
+		MainGame game = new MainGame("Flappy X"); 
+		AppGameContainer container = new AppGameContainer(game);
+		container.setDisplayMode(GAME_WIDTH, GAME_HEIGHT, false);
+		container.setMinimumLogicUpdateInterval(1000/60);
+		container.start();
 	}
 
 }
