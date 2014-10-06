@@ -34,7 +34,7 @@ public class Player implements Entity {
 		this.aTurnRate = aTurnRate;
 		this.aNormalRate = aNormalRate;
 		
-		image = new Image("res/circle.png");
+		image = new Image("res/player-nyan-cat.png");
 	}
 
 	public void render(Graphics g) {

@@ -14,15 +14,16 @@ import org.newdawn.slick.openal.AudioLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
 public class MainGame extends BasicGame {
-
-	private Player player;
-	private Audio wavEffect;
 	
 	public static final int GAME_WIDTH = 480;
 	public static final int GAME_HEIGHT = 640;
 	public static final int OBSTACLE_COUNT = 4;
+	public static final int BACKGROUND_COUNT = 2;
 	
+	private Player player;
 	private Obstacle[] obstacles;
+	private Background[] backgrounds;
+	private Audio wavEffect;
 	private ArrayList<Entity> entities;
 	
 	public MainGame(String title) {
@@ -32,14 +33,18 @@ public class MainGame extends BasicGame {
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		initPlayer();
+		initBackground();
 		initObstacle();
+		initPlayer();
 		initSound();
 	}
 
-	private void initPlayer() throws SlickException{
-		player = new Player(GAME_WIDTH/2, GAME_HEIGHT/4, 0.2f, -2f, 0.04f);
-		entities.add(player);
+	private void initBackground() throws SlickException {
+		backgrounds = new Background[BACKGROUND_COUNT];
+		for(int i = 0; i < BACKGROUND_COUNT; i++) {
+			backgrounds[i] = new Background(0, -GAME_HEIGHT * i, 1f);
+			entities.add(backgrounds[i]);
+		}
 	}
 	
 	private void initObstacle() throws SlickException {
@@ -48,6 +53,11 @@ public class MainGame extends BasicGame {
 			obstacles[i] = new Obstacle(Obstacle.randomX(), -MainGame.GAME_HEIGHT + Obstacle.HEIGHT + (GAME_HEIGHT / (OBSTACLE_COUNT-1f)) * i - (GAME_HEIGHT / 2f), 4f);
 			entities.add(obstacles[i]);
 		}
+	}
+	
+	private void initPlayer() throws SlickException{
+		player = new Player(GAME_WIDTH/2, GAME_HEIGHT/4, 0.2f, -2f, 0.04f);
+		entities.add(player);
 	}
 
 	private void initSound() {
