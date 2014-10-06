@@ -45,7 +45,6 @@ public class Obstacle implements Entity {
 	
 	@Override
 	public void update(int delta) {
-		System.out.println(y);
 		updatePosition();
 		updateWrapAround();
 	}

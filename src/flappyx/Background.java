@@ -6,13 +6,11 @@ import org.newdawn.slick.SlickException;
 
 public class Background implements Entity{
 
-	private float x;
 	private float y;
 	private float vy;
 	private Image image;
 
-	public Background(float x, float y, float vy) throws SlickException {
-		this.x = x;
+	public Background(float y, float vy) throws SlickException {
 		this.y = y;
 		this.vy = vy;
 		image = new Image("res/bg-nyan-cat.jpg");
@@ -25,7 +23,26 @@ public class Background implements Entity{
 
 	@Override
 	public void update(int delta) {
+		updatePosition();
+		updateWrapAround();
+	}
+	
+	protected void updatePosition() {
 		y += vy;
+	}
+
+	private void updateWrapAround() {
+		if (isBelowScene()) {
+			moveToAboveScene();
+		}
+	}
+	
+	private void moveToAboveScene() {
+		y -= (MainGame.GAME_HEIGHT / (MainGame.OBSTACLE_COUNT-1f)) * MainGame.OBSTACLE_COUNT;
+	}
+
+	private boolean isBelowScene() {
+		return y > MainGame.GAME_HEIGHT;
 	}
 	
 }

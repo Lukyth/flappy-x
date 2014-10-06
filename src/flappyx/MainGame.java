@@ -42,7 +42,7 @@ public class MainGame extends BasicGame {
 	private void initBackground() throws SlickException {
 		backgrounds = new Background[BACKGROUND_COUNT];
 		for(int i = 0; i < BACKGROUND_COUNT; i++) {
-			backgrounds[i] = new Background(0, -GAME_HEIGHT * i, 1f);
+			backgrounds[i] = new Background(-GAME_HEIGHT * i, 1f);
 			entities.add(backgrounds[i]);
 		}
 	}
