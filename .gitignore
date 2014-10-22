@@ -67,3 +67,12 @@ local.properties
  
 # PDT-specific
 .buildpath
+
+######################
+# Papyrus
+######################
+
+*.di
+*.uml
+*.xmi
+*.notation
