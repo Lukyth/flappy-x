@@ -4,7 +4,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
-public class Background implements Entity{
+public class Background implements Entity {
 
 	private float y;
 	private float vy;
@@ -26,7 +26,7 @@ public class Background implements Entity{
 		updatePosition();
 		updateWrapAround();
 	}
-	
+
 	protected void updatePosition() {
 		y += vy;
 	}
@@ -36,13 +36,14 @@ public class Background implements Entity{
 			moveToAboveScene();
 		}
 	}
-	
+
 	private void moveToAboveScene() {
-		y -= (MainGame.GAME_HEIGHT / (MainGame.OBSTACLE_COUNT-1f)) * MainGame.OBSTACLE_COUNT;
+		y -= (MainGame.GAME_HEIGHT / (MainGame.OBSTACLE_COUNT - 1f))
+				* MainGame.OBSTACLE_COUNT;
 	}
 
 	private boolean isBelowScene() {
 		return y > MainGame.GAME_HEIGHT;
 	}
-	
+
 }
