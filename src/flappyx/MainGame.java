@@ -107,7 +107,7 @@ public class MainGame extends BasicGameState {
 	}
 
 	@Override
-	public void init(GameContainer container, StateBasedGame arg1)
+	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		isGameOver = false;
 		score = 0;
@@ -119,7 +119,7 @@ public class MainGame extends BasicGameState {
 	}
 
 	@Override
-	public void render(GameContainer container, StateBasedGame arg1, Graphics g)
+	public void render(GameContainer container, StateBasedGame game, Graphics g)
 			throws SlickException {
 		for (Entity entity : entities) {
 			entity.render(g);
@@ -128,7 +128,7 @@ public class MainGame extends BasicGameState {
 	}
 
 	@Override
-	public void update(GameContainer container, StateBasedGame arg1, int delta)
+	public void update(GameContainer container, StateBasedGame game, int delta)
 			throws SlickException {
 		for (Entity entity : entities) {
 			entity.update(delta);
