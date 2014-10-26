@@ -96,12 +96,12 @@ public class MainGame extends BasicGameState {
 		switch (key) {
 		case Input.KEY_SLASH:
 			player.switchDir();
-//			wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
+			// wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
 			break;
 
 		case Input.KEY_Z:
 			player.switchAcc();
-//			wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
+			// wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
 			break;
 		}
 	}
@@ -124,6 +124,7 @@ public class MainGame extends BasicGameState {
 		for (Entity entity : entities) {
 			entity.render(g);
 		}
+		g.drawString("" + score, Setup.GAME_WIDTH / 2, 100);
 	}
 
 	@Override

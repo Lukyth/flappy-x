@@ -44,10 +44,8 @@ public class Obstacle implements Entity {
 
 	@Override
 	public void render(Graphics g) {
-		leftImage.draw(x - (SPACE / 2) - WIDTH, y
-				- (HEIGHT / 2));
-		rightImage.draw(x + (SPACE / 2), y
-				- (HEIGHT / 2));
+		leftImage.draw(x - (SPACE / 2) - WIDTH, y - (HEIGHT / 2));
+		rightImage.draw(x + (SPACE / 2), y - (HEIGHT / 2));
 	}
 
 	@Override
