@@ -10,7 +10,7 @@ public class Player implements Entity {
 
 	public static final int WIDTH = 20;
 	public static final int HEIGHT = 20;
-	
+
 	private float x;
 	private float y;
 	private float velocity;
@@ -21,7 +21,7 @@ public class Player implements Entity {
 
 	public Player(float x, float y, float v, float a, float dir)
 			throws SlickException {
-		
+
 		this.x = x;
 		this.y = y;
 		this.velocity = v;
@@ -39,32 +39,39 @@ public class Player implements Entity {
 		updatePosition();
 		updateVelocity();
 	}
-	
-	private void updatePosition () {
+
+	private void updatePosition() {
 		x += Math.sin(Math.toRadians(direction)) * velocity;
 		y -= Math.cos(Math.toRadians(direction)) * velocity;
 	}
-	
-	private void updateVelocity () {
+
+	private void updateVelocity() {
 		velocity += acceleration;
 	}
 
 	public boolean isCollide(Obstacle obstacle) {
-		return CollisionDetector.isCollide(x, y, obstacle.getX(), obstacle.getY());
+		return CollisionDetector.isCollide(x, y, obstacle.getX(),
+				obstacle.getY());
 	}
 
 	public void switchDir() {
 		if (direction == 45) {
 			direction = 315;
-		}
-		else {
+		} else {
 			direction = 45;
 		}
 	}
 
 	public void switchAcc() {
 		acceleration *= -1;
-//		velocity += acceleration * 10;
+		// velocity += acceleration * 10;
+	}
+
+	public boolean isOutOfScreen() {
+		if (x <= 0 || x >= Setup.GAME_WIDTH || y <= 0 || y >= Setup.GAME_HEIGHT) {
+			return true;
+		}
+		return false;
 	}
 
 }

@@ -10,7 +10,7 @@ public class Setup extends StateBasedGame {
 	public static final int GAME_WIDTH = 480;
 	public static final int GAME_HEIGHT = 640;
 	public static final int FRAME_DELAY = 1000 / 60;
-	
+
 	public Setup(String name) {
 		super(name);
 	}
@@ -27,5 +27,5 @@ public class Setup extends StateBasedGame {
 		container.setMinimumLogicUpdateInterval(FRAME_DELAY);
 		container.start();
 	}
-	
+
 }

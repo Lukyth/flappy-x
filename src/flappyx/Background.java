@@ -6,13 +6,11 @@ import org.newdawn.slick.SlickException;
 
 public class Background implements Entity {
 
-	private float x;
 	private float y;
 	private float vy;
 	private Image image;
 
-	public Background(float x, float y, float vy) throws SlickException {
-		this.x = x;
+	public Background(float y, float vy) throws SlickException {
 		this.y = y;
 		this.vy = vy;
 		image = new Image("res/bg-nyan-cat.jpg");
@@ -20,7 +18,7 @@ public class Background implements Entity {
 
 	@Override
 	public void render(Graphics g) {
-		image.draw(x, y);
+		image.draw(0, y);
 	}
 
 	@Override

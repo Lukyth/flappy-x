@@ -17,7 +17,7 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class MainGame extends BasicGameState {
 
-	public static final int OBSTACLE_COUNT = 4;
+	public static final int OBSTACLE_COUNT = 3;
 	public static final int BACKGROUND_COUNT = 2;
 
 	private Player player;
@@ -25,7 +25,8 @@ public class MainGame extends BasicGameState {
 	private Background[] backgrounds;
 	private Audio wavEffect;
 	private ArrayList<Entity> entities;
-	private int score;
+	public static int score;
+	public static boolean scored;
 	private boolean isGameOver;
 
 	public MainGame() {
@@ -36,10 +37,7 @@ public class MainGame extends BasicGameState {
 	private void initBackground() throws SlickException {
 		backgrounds = new Background[BACKGROUND_COUNT];
 		for (int i = 0; i < BACKGROUND_COUNT; i++) {
-//			if (i == 0)
-				backgrounds[i] = new Background(0, -Setup.GAME_HEIGHT * i, 1f);
-//			else
-//				backgrounds[i] = new Background(Setup.GAME_WIDTH / 2, -Setup.GAME_HEIGHT * i, 1f);
+			backgrounds[i] = new Background(-Setup.GAME_HEIGHT * i, 1f);
 			entities.add(backgrounds[i]);
 		}
 	}
@@ -47,16 +45,17 @@ public class MainGame extends BasicGameState {
 	private void initObstacle() throws SlickException {
 		obstacles = new Obstacle[OBSTACLE_COUNT];
 		for (int i = 0; i < OBSTACLE_COUNT; i++) {
-			obstacles[i] = new Obstacle(Obstacle.randomX(),
-					-Setup.GAME_HEIGHT + Obstacle.HEIGHT
-							+ ((Setup.GAME_HEIGHT / (OBSTACLE_COUNT - 1f)) * i)
-							- (Setup.GAME_HEIGHT / 2f), 4f);
+			obstacles[i] = new Obstacle(Obstacle.randomX(), -Setup.GAME_HEIGHT
+					+ Obstacle.HEIGHT
+					+ ((Setup.GAME_HEIGHT / (OBSTACLE_COUNT - 1f)) * i)
+					- (Setup.GAME_HEIGHT / 2f), 4f);
 			entities.add(obstacles[i]);
 		}
 	}
 
 	private void initPlayer() throws SlickException {
-		player = new Player(Setup.GAME_WIDTH / 2, Setup.GAME_HEIGHT *0.8f, 0, 0.3f, 45f);
+		player = new Player(Setup.GAME_WIDTH / 2, Setup.GAME_HEIGHT * 0.8f, 0,
+				0.3f, 45f);
 		entities.add(player);
 	}
 
@@ -70,10 +69,24 @@ public class MainGame extends BasicGameState {
 	}
 
 	private boolean checkCollision() {
-		for (Obstacle obstacle: obstacles) {
+		if (hitObstacle() || hitEdge()) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean hitObstacle() {
+		for (Obstacle obstacle : obstacles) {
 			if (player.isCollide(obstacle)) {
 				return true;
 			}
+		}
+		return false;
+	}
+
+	private boolean hitEdge() {
+		if (player.isOutOfScreen()) {
+			return true;
 		}
 		return false;
 	}
@@ -83,12 +96,12 @@ public class MainGame extends BasicGameState {
 		switch (key) {
 		case Input.KEY_SLASH:
 			player.switchDir();
-			wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
+//			wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
 			break;
 
 		case Input.KEY_Z:
 			player.switchAcc();
-			wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
+//			wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
 			break;
 		}
 	}
@@ -98,6 +111,7 @@ public class MainGame extends BasicGameState {
 			throws SlickException {
 		isGameOver = false;
 		score = 0;
+		scored = false;
 		initBackground();
 		initObstacle();
 		initPlayer();
