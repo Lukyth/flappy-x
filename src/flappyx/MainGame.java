@@ -52,7 +52,7 @@ public class MainGame extends BasicGameState {
 	}
 
 	private void initPlayer() throws SlickException {
-		player = new Player(Setup.GAME_WIDTH / 2, Setup.GAME_HEIGHT *0.8f, 0.2f, -2f, 0.04f);
+		player = new Player(Setup.GAME_WIDTH / 2, Setup.GAME_HEIGHT *0.8f, 0, 0.3f, 45f);
 		entities.add(player);
 	}
 
@@ -78,12 +78,12 @@ public class MainGame extends BasicGameState {
 	public void keyPressed(int key, char c) {
 		switch (key) {
 		case Input.KEY_SLASH:
-			player.switchY();
+			player.switchDir();
 			wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
 			break;
 
 		case Input.KEY_Z:
-			player.switchX();
+			player.switchAcc();
 			wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
 			break;
 		}
