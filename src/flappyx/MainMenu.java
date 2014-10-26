@@ -33,8 +33,15 @@ public class MainMenu extends BasicGameState {
 	private void initButton() throws SlickException {
 		buttons = new Button[BUTTON_COUNT];
 		for (int i = 0; i < BUTTON_COUNT; i++) {
-			buttons[i] = new Button(Setup.GAME_WIDTH / 2,
-					Setup.GAME_HEIGHT / 2, "play");
+			String type = null;
+			if (i == 0) {
+				type = "exit";
+			}
+			else if (i == 1) {
+				type = "play";
+			}
+			buttons[i] = new Button(Setup.GAME_WIDTH / 2f,
+					Setup.GAME_HEIGHT * 0.8f - (100 * i), type);
 			entities.add(buttons[i]);
 		}
 	}
@@ -52,6 +59,15 @@ public class MainMenu extends BasicGameState {
 				choice = 1;
 			}
 			break;
+		}
+		clearButtonChoice();
+	}
+
+	private void clearButtonChoice() {
+		for (int i = 0; i < buttons.length; i++) {
+			if (i != choice) {
+				buttons[i].choosed = false;
+			}
 		}
 		buttons[choice].choosed = true;
 	}

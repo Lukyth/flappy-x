@@ -15,21 +15,34 @@ public class Button implements Entity {
 	private float y;
 	public Image image;
 	public boolean choosed;
+	private String type;
 
-	public Button(int x, int y, String type) throws SlickException {
-		this.x = x;
-		this.y = y;
+	public Button(float f, float g, String type) throws SlickException {
+		this.x = f;
+		this.y = g;
+		this.type = type;
 		image = new Image("res/button-" + type + ".png");
 	}
 
 	@Override
 	public void render(Graphics g) {
-		image.draw(x, y);
+		if (choosed) {
+			image.draw(x - (WIDTH_CHOOSED / 2), y - (HEIGHT_CHOOSED / 2));
+		}
+		else {
+			image.draw(x - (WIDTH / 2), y - (HEIGHT / 2));
+		}
 	}
 
 	@Override
-	public void update(int delta) {
-
+	public void update(int delta) throws SlickException {
+		if (choosed) {
+			image = new Image("res/button-" + type + "-choosed.png");
+			
+		}
+		else {
+			image = new Image("res/button-" + type + ".png");
+		}
 	}
 
 }
