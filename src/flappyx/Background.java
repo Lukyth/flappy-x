@@ -38,12 +38,12 @@ public class Background implements Entity {
 	}
 
 	private void moveToAboveScene() {
-		y -= (MainGame.GAME_HEIGHT / (MainGame.OBSTACLE_COUNT - 1f))
+		y -= (Setup.GAME_HEIGHT / (MainGame.OBSTACLE_COUNT - 1f))
 				* MainGame.OBSTACLE_COUNT;
 	}
 
 	private boolean isBelowScene() {
-		return y > MainGame.GAME_HEIGHT;
+		return y > Setup.GAME_HEIGHT;
 	}
 
 }

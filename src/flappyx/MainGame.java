@@ -11,15 +11,14 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioLoader;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.util.ResourceLoader;
 
-public class MainGame extends BasicGame {
+public class MainGame extends BasicGameState {
 
-	public static final int GAME_WIDTH = 480;
-	public static final int GAME_HEIGHT = 640;
 	public static final int OBSTACLE_COUNT = 4;
 	public static final int BACKGROUND_COUNT = 2;
-	public static final int FRAME_DELAY = 1000 / 60;
 
 	private Player player;
 	private Obstacle[] obstacles;
@@ -28,24 +27,15 @@ public class MainGame extends BasicGame {
 	private ArrayList<Entity> entities;
 	private boolean isGameOver;
 
-	public MainGame(String title) {
-		super(title);
+	public MainGame() {
+		super();
 		entities = new ArrayList<Entity>();
-	}
-
-	@Override
-	public void init(GameContainer container) throws SlickException {
-		isGameOver = false;
-		initBackground();
-		initObstacle();
-		initPlayer();
-		initSound();
 	}
 
 	private void initBackground() throws SlickException {
 		backgrounds = new Background[BACKGROUND_COUNT];
 		for (int i = 0; i < BACKGROUND_COUNT; i++) {
-			backgrounds[i] = new Background(-GAME_HEIGHT * i, 1f);
+			backgrounds[i] = new Background(-Setup.GAME_HEIGHT * i, 1f);
 			entities.add(backgrounds[i]);
 		}
 	}
@@ -54,15 +44,15 @@ public class MainGame extends BasicGame {
 		obstacles = new Obstacle[OBSTACLE_COUNT];
 		for (int i = 0; i < OBSTACLE_COUNT; i++) {
 			obstacles[i] = new Obstacle(Obstacle.randomX(),
-					-MainGame.GAME_HEIGHT + Obstacle.HEIGHT
-							+ ((GAME_HEIGHT / (OBSTACLE_COUNT - 1f)) * i)
-							- (GAME_HEIGHT / 2f), 4f);
+					-Setup.GAME_HEIGHT + Obstacle.HEIGHT
+							+ ((Setup.GAME_HEIGHT / (OBSTACLE_COUNT - 1f)) * i)
+							- (Setup.GAME_HEIGHT / 2f), 4f);
 			entities.add(obstacles[i]);
 		}
 	}
 
 	private void initPlayer() throws SlickException {
-		player = new Player(GAME_WIDTH / 2, GAME_HEIGHT *0.8f, 0.2f, -2f, 0.04f);
+		player = new Player(Setup.GAME_WIDTH / 2, Setup.GAME_HEIGHT *0.8f, 0.2f, -2f, 0.04f);
 		entities.add(player);
 	}
 
@@ -72,25 +62,6 @@ public class MainGame extends BasicGame {
 					ResourceLoader.getResourceAsStream("res/bading.wav"));
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void render(GameContainer container, Graphics g)
-			throws SlickException {
-		for (Entity entity : entities) {
-			entity.render(g);
-		}
-	}
-
-	@Override
-	public void update(GameContainer container, int delta)
-			throws SlickException {
-		for (Entity entity : entities) {
-			entity.update(delta);
-		}
-		if (checkCollision()) {
-			isGameOver = true;
 		}
 	}
 
@@ -118,12 +89,38 @@ public class MainGame extends BasicGame {
 		}
 	}
 
-	public static void main(String[] args) throws SlickException {
-		MainGame game = new MainGame("Flappy X");
-		AppGameContainer container = new AppGameContainer(game);
-		container.setDisplayMode(GAME_WIDTH, GAME_HEIGHT, false);
-		container.setMinimumLogicUpdateInterval(FRAME_DELAY);
-		container.start();
+	@Override
+	public void init(GameContainer container, StateBasedGame arg1)
+			throws SlickException {
+		isGameOver = false;
+		initBackground();
+		initObstacle();
+		initPlayer();
+		initSound();
+	}
+
+	@Override
+	public void render(GameContainer container, StateBasedGame arg1, Graphics g)
+			throws SlickException {
+		for (Entity entity : entities) {
+			entity.render(g);
+		}
+	}
+
+	@Override
+	public void update(GameContainer container, StateBasedGame arg1, int delta)
+			throws SlickException {
+		for (Entity entity : entities) {
+			entity.update(delta);
+		}
+		if (checkCollision()) {
+			isGameOver = true;
+		}
+	}
+
+	@Override
+	public int getID() {
+		return 1;
 	}
 
 }

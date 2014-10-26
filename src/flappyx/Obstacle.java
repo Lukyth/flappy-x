@@ -39,7 +39,7 @@ public class Obstacle implements Entity {
 
 	public static int randomX() {
 		Random random = new Random();
-		return (SPACE / 2) + random.nextInt(MainGame.GAME_WIDTH - SPACE);
+		return (SPACE / 2) + random.nextInt(Setup.GAME_WIDTH - SPACE);
 	}
 
 	@Override
@@ -67,13 +67,13 @@ public class Obstacle implements Entity {
 	}
 
 	private void moveToAboveScene() {
-		y -= (MainGame.GAME_HEIGHT / (MainGame.OBSTACLE_COUNT - 1f))
+		y -= (Setup.GAME_HEIGHT / (MainGame.OBSTACLE_COUNT - 1f))
 				* MainGame.OBSTACLE_COUNT;
 		x = randomX();
 	}
 
 	private boolean isBelowScene() {
-		return y > MainGame.GAME_HEIGHT + (HEIGHT / 2);
+		return y > Setup.GAME_HEIGHT + (HEIGHT / 2);
 	}
 
 }
