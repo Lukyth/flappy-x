@@ -25,6 +25,7 @@ public class MainGame extends BasicGameState {
 	private Background[] backgrounds;
 	private Audio wavEffect;
 	private ArrayList<Entity> entities;
+	private int score;
 	private boolean isGameOver;
 
 	public MainGame() {
@@ -35,7 +36,10 @@ public class MainGame extends BasicGameState {
 	private void initBackground() throws SlickException {
 		backgrounds = new Background[BACKGROUND_COUNT];
 		for (int i = 0; i < BACKGROUND_COUNT; i++) {
-			backgrounds[i] = new Background(-Setup.GAME_HEIGHT * i, 1f);
+//			if (i == 0)
+				backgrounds[i] = new Background(0, -Setup.GAME_HEIGHT * i, 1f);
+//			else
+//				backgrounds[i] = new Background(Setup.GAME_WIDTH / 2, -Setup.GAME_HEIGHT * i, 1f);
 			entities.add(backgrounds[i]);
 		}
 	}
@@ -93,6 +97,7 @@ public class MainGame extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame arg1)
 			throws SlickException {
 		isGameOver = false;
+		score = 0;
 		initBackground();
 		initObstacle();
 		initPlayer();
