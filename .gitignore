@@ -72,6 +72,7 @@ local.properties
 # Papyrus
 ######################
 
+/java2kdmFragments/
 *.di
 *.uml
 *.xmi
