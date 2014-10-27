@@ -52,4 +52,9 @@ public class Button implements Entity {
 		buttons[choice].choosed = true;
 	}
 
+	public static void setButtonChoice(Button[] buttons, int choice) {
+		buttons[choice].choosed = true;
+		clearButtonChoice(buttons, choice);
+	}
+
 }

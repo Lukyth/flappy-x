@@ -1,6 +1,7 @@
 package flappyx;
 
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class MainGame extends BasicGameState {
 	private TrueTypeFont font;
 
 	private int choice;
+	private TrueTypeFont fontGameOver;
 
 	public MainGame() {
 		super();
@@ -57,8 +59,7 @@ public class MainGame extends BasicGameState {
 			initButton();
 		}
 		choice = 1;
-		buttons[choice].choosed = true;
-		Button.clearButtonChoice(buttons, choice);
+		Button.setButtonChoice(buttons, choice);
 		isGameOver = false;
 		score = 0;
 		scored = false;
@@ -66,6 +67,11 @@ public class MainGame extends BasicGameState {
 		initObstacle();
 		initPlayer();
 		initSound();
+		try {
+			initFont();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void initBackground() throws SlickException {
@@ -170,8 +176,7 @@ public class MainGame extends BasicGameState {
 				}
 				break;
 			}
-			buttons[choice].choosed = true;
-			Button.clearButtonChoice(buttons, choice);
+			Button.setButtonChoice(buttons, choice);
 		}
 	}
 
@@ -179,15 +184,25 @@ public class MainGame extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		initGame();
+	}
+
+	private void initFont() throws IOException {
+
+		InputStream inputStream = ResourceLoader
+				.getResourceAsStream("res/Hanzipen.ttc");
+		Font fontTmp = null;
 		try {
-			InputStream inputStream = ResourceLoader
-					.getResourceAsStream("res/Hanzipen.ttc");
-			Font scoreFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-			scoreFont = scoreFont.deriveFont(48f);
-			font = new TrueTypeFont(scoreFont, true);
-		} catch (Exception e) {
+			fontTmp = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+		} catch (FontFormatException e) {
 			e.printStackTrace();
 		}
+
+		fontTmp = fontTmp.deriveFont(40f);
+		font = new TrueTypeFont(fontTmp, true);
+
+		fontTmp = fontTmp.deriveFont(46f);
+		fontGameOver = new TrueTypeFont(fontTmp, true);
+
 	}
 
 	@Override
@@ -199,7 +214,8 @@ public class MainGame extends BasicGameState {
 		if (isGameOver) {
 			renderPopup(g);
 		} else {
-			font.drawString(110f, 140f, "Your Score : " + score, Color.darkGray);
+			font.drawString(Setup.GAME_WIDTH / 2 - 40f, 10f,
+					"Score : " + score, Color.white);
 		}
 
 	}
@@ -212,6 +228,10 @@ public class MainGame extends BasicGameState {
 		for (Entity entity : entitiesGameOver) {
 			entity.render(g);
 		}
+		fontGameOver.drawString(Setup.GAME_WIDTH / 2 - 100f,
+				Setup.GAME_HEIGHT * 0.25f, "Your Score", Color.white);
+		fontGameOver.drawString(Setup.GAME_WIDTH / 2 - 10f,
+				Setup.GAME_HEIGHT * 0.35f, "" + score, Color.white);
 	}
 
 	@Override

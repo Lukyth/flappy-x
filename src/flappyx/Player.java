@@ -64,7 +64,6 @@ public class Player implements Entity {
 
 	public void switchAcc() {
 		acceleration *= -1;
-		// velocity += acceleration * 10;
 	}
 
 	public boolean isOutOfScreen() {

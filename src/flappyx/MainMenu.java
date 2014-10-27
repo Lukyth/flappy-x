@@ -37,12 +37,11 @@ public class MainMenu extends BasicGameState {
 			String type = null;
 			if (i == 0) {
 				type = "exit";
-			}
-			else if (i == 1) {
+			} else if (i == 1) {
 				type = "play";
 			}
-			buttons[i] = new Button(Setup.GAME_WIDTH / 2f,
-					Setup.GAME_HEIGHT * 0.8f - (BUTTON_MARGIN * i), type);
+			buttons[i] = new Button(Setup.GAME_WIDTH / 2f, Setup.GAME_HEIGHT
+					* 0.8f - (BUTTON_MARGIN * i), type);
 			entities.add(buttons[i]);
 		}
 	}
@@ -89,7 +88,8 @@ public class MainMenu extends BasicGameState {
 			if (choice == 0) {
 				System.exit(0);
 			}
-			game.enterState(choice, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+			game.enterState(choice, new FadeOutTransition(Color.black),
+					new FadeInTransition(Color.black));
 		}
 		for (Entity entity : entities) {
 			entity.update(delta);
