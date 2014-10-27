@@ -10,6 +10,9 @@ public class Player implements Entity {
 
 	public static final int WIDTH = 20;
 	public static final int HEIGHT = 20;
+	
+	private static final float DIRECTION_RIGHT = 45;
+	private static final float DIRECTION_LEFT = 315;
 
 	private float x;
 	private float y;
@@ -55,11 +58,12 @@ public class Player implements Entity {
 	}
 
 	public void switchDir() {
-		if (direction == 45) {
-			direction = 315;
+		if (direction == DIRECTION_RIGHT) {
+			direction = DIRECTION_LEFT;
 		} else {
-			direction = 45;
+			direction = DIRECTION_RIGHT;
 		}
+		image = image.getFlippedCopy(true, false);
 	}
 
 	public void switchAcc() {
