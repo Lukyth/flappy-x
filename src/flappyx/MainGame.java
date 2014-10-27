@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -25,12 +23,13 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class MainGame extends BasicGameState {
 
-	public static final int OBSTACLE_COUNT = 3;
-	public static final int BACKGROUND_COUNT = 2;
-	public static final int BUTTON_COUNT = 2;
+	private static final int BACKGROUND_COUNT = 2;
+	private static final int BUTTON_COUNT = 2;
 	private static final int POPUP_WIDTH = 400;
 	private static final int POPUP_HEIGHT = 480;
 	private static final int BUTTON_MARGIN = 100;
+	
+	public static final int OBSTACLE_COUNT = 3;
 
 	private Player player;
 	private Obstacle[] obstacles;
@@ -38,15 +37,14 @@ public class MainGame extends BasicGameState {
 	private Audio wavEffect;
 	private ArrayList<Entity> entities;
 	private ArrayList<Entity> entitiesGameOver;
-	public static int score;
-	public static boolean scored;
-	private boolean isGameOver;
-
 	private Button[] buttons;
 	private TrueTypeFont font;
-
-	private int choice;
 	private TrueTypeFont fontGameOver;
+	private int choice;
+	private boolean isGameOver;
+	
+	public static int score;
+	public static boolean scored;
 
 	public MainGame() {
 		super();
@@ -154,13 +152,13 @@ public class MainGame extends BasicGameState {
 			case Input.KEY_LEFT:
 			case Input.KEY_RIGHT:
 				player.switchDir();
-				// wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
+				 wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
 				break;
 
 			case Input.KEY_UP:
 			case Input.KEY_DOWN:
 				player.switchAcc();
-				// wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
+				 wavEffect.playAsSoundEffect(1.0f, 1.0f, false);
 				break;
 			}
 		} else {

@@ -13,9 +13,10 @@ public class Button implements Entity {
 
 	private float x;
 	private float y;
-	public Image image;
-	public boolean choosed;
+	private Image image;
 	private String type;
+	
+	public boolean choosed;
 
 	public Button(float f, float g, String type) throws SlickException {
 		this.x = f;
@@ -53,7 +54,6 @@ public class Button implements Entity {
 	}
 
 	public static void setButtonChoice(Button[] buttons, int choice) {
-		buttons[choice].choosed = true;
 		clearButtonChoice(buttons, choice);
 	}
 
