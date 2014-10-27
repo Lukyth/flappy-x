@@ -16,6 +16,7 @@ public class MainMenu extends BasicGameState {
 
 	public static final int BACKGROUND_COUNT = 2;
 	public static final int BUTTON_COUNT = 2;
+	private static final int BUTTON_MARGIN = 100;
 
 	private int choice;
 	private Background[] backgrounds;
@@ -41,7 +42,7 @@ public class MainMenu extends BasicGameState {
 				type = "play";
 			}
 			buttons[i] = new Button(Setup.GAME_WIDTH / 2f,
-					Setup.GAME_HEIGHT * 0.8f - (100 * i), type);
+					Setup.GAME_HEIGHT * 0.8f - (BUTTON_MARGIN * i), type);
 			entities.add(buttons[i]);
 		}
 	}
@@ -60,16 +61,7 @@ public class MainMenu extends BasicGameState {
 			}
 			break;
 		}
-		clearButtonChoice();
-	}
-
-	private void clearButtonChoice() {
-		for (int i = 0; i < buttons.length; i++) {
-			if (i != choice) {
-				buttons[i].choosed = false;
-			}
-		}
-		buttons[choice].choosed = true;
+		Button.clearButtonChoice(buttons, choice);
 	}
 
 	@Override
